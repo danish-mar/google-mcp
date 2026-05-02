@@ -1,0 +1,46 @@
+<section class="mx-auto max-w-md">
+  <div class="rounded-[2rem] border border-black/10 bg-white/80 p-8 shadow-panel backdrop-blur">
+    <div class="mb-8 flex items-center gap-4">
+      <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-xl text-white">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-black/45">Protected Access</p>
+        <h2 class="text-3xl font-semibold">Sign in to the dashboard</h2>
+      </div>
+    </div>
+
+    <p class="mb-6 text-sm text-black/65">
+      This WebUI is protected by the password configured in your <code>.env</code> file.
+    </p>
+
+    <% if (errorMessage) { %>
+    <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <%= errorMessage %>
+    </div>
+    <% } %>
+
+    <form action="/login" method="post" class="space-y-5">
+      <label class="block">
+        <span class="mb-2 block text-sm font-medium">Password</span>
+        <input
+          class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 outline-none transition focus:border-accent focus:ring-4 focus:ring-emerald-100"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter dashboard password"
+          required
+        />
+      </label>
+
+      <button
+        class="flex w-full items-center justify-center gap-2 rounded-2xl bg-ink px-4 py-3 font-medium text-white transition hover:bg-accent"
+        type="submit"
+      >
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        Unlock WebUI
+      </button>
+    </form>
+  </div>
+</section>

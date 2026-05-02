@@ -1,0 +1,97 @@
+<section class="mx-auto max-w-3xl">
+  <div class="rounded-[2rem] border border-black/10 bg-white/80 p-8 shadow-panel backdrop-blur">
+    <div class="mb-8 flex items-center gap-4">
+      <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-xl text-white">
+        <i class="fa-solid fa-sliders"></i>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-[0.3em] text-black/45">WebUI Settings</p>
+        <h2 class="text-3xl font-semibold">Tune the dashboard</h2>
+      </div>
+    </div>
+
+    <% if (saveMessage) { %>
+    <div class="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
+      <i class="fa-solid fa-circle-check"></i>
+      <%= saveMessage %>
+    </div>
+    <% } %>
+
+    <form action="/settings" method="post" class="space-y-6">
+      <label class="block">
+        <span class="mb-2 block text-sm font-medium">WebUI Title</span>
+        <input
+          class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 outline-none transition focus:border-accent focus:ring-4 focus:ring-emerald-100"
+          name="title"
+          type="text"
+          value="<%= webUiSettings.title %>"
+          required
+        />
+      </label>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <label class="block">
+          <span class="mb-2 block text-sm font-medium">Accent Tone</span>
+          <select
+            class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 outline-none transition focus:border-accent focus:ring-4 focus:ring-emerald-100"
+            name="accentTone"
+          >
+            <option value="emerald" <%= webUiSettings.accentTone === "emerald" ? "selected" : "" %>>
+              Emerald
+            </option>
+            <option value="amber" <%= webUiSettings.accentTone === "amber" ? "selected" : "" %>>
+              Amber
+            </option>
+            <option value="slate" <%= webUiSettings.accentTone === "slate" ? "selected" : "" %>>
+              Slate
+            </option>
+          </select>
+        </label>
+
+        <label class="block">
+          <span class="mb-2 block text-sm font-medium">Auto Refresh Seconds</span>
+          <input
+            class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 outline-none transition focus:border-accent focus:ring-4 focus:ring-emerald-100"
+            min="5"
+            max="120"
+            name="autoRefreshSeconds"
+            type="number"
+            value="<%= webUiSettings.autoRefreshSeconds %>"
+            required
+          />
+        </label>
+      </div>
+
+      <label class="flex items-center gap-3 rounded-2xl border border-black/10 bg-black/[0.02] px-4 py-3">
+        <input
+          class="h-4 w-4 rounded border-black/20 text-accent focus:ring-accent"
+          name="compactCards"
+          type="checkbox"
+          <%= webUiSettings.compactCards ? "checked" : "" %>
+        />
+        <span class="text-sm">Use compact metric cards</span>
+      </label>
+
+      <div class="rounded-2xl bg-amber-50 px-4 py-3 text-sm text-amber-900">
+        <i class="fa-solid fa-circle-info"></i>
+        These settings update the current Node.js process only. They do not rewrite your <code>.env</code> file.
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button
+          class="rounded-2xl bg-ink px-5 py-3 font-medium text-white transition hover:bg-accent"
+          type="submit"
+        >
+          <i class="fa-solid fa-floppy-disk"></i>
+          Save Settings
+        </button>
+        <a
+          class="rounded-2xl border border-black/10 px-5 py-3 text-sm transition hover:border-accent hover:text-accent"
+          href="/dashboard"
+        >
+          Back to Dashboard
+        </a>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+{
+  "name": "google-mcp",
+  "version": "1.0.0",
+  "description": "Single MCP gateway for YouTube, Google Maps, Calendar and Gmail with per-service endpoints and a WebUI control center",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc --noEmit -p tsconfig.json"
+  },
+  "keywords": ["mcp", "fastmcp", "google", "youtube", "maps", "calendar", "gmail", "model-context-protocol"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "fastmcp": "^4.0.1",
+    "googleapis": "^146.0.0",
+    "youtube-transcript": "^1.2.1",
+    "zod": "^4.4.1"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/node": "^25.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  }
+}

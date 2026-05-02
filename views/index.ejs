@@ -1,0 +1,159 @@
+<section class="space-y-8">
+  <div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+    <div class="rounded-[2rem] border border-black/10 bg-white/80 p-8 shadow-panel backdrop-blur">
+      <div class="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-black/45">Control Center</p>
+          <h2 class="text-4xl font-semibold"><%= serverName %></h2>
+        </div>
+        <span class="rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-accent">
+          <i class="fa-solid fa-circle-check"></i>
+          Live
+        </span>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <% dashboardCards.forEach((card) => { %>
+        <article class="rounded-3xl border border-black/5 bg-white p-5">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-accent">
+            <i class="<%= card.icon %>"></i>
+          </div>
+          <p class="text-sm text-black/55"><%= card.label %></p>
+          <p class="mt-2 text-2xl font-semibold"><%= card.value %></p>
+        </article>
+        <% }) %>
+      </div>
+    </div>
+
+    <div class="rounded-[2rem] border border-black/10 bg-ink p-8 text-white shadow-panel">
+      <p class="text-xs uppercase tracking-[0.3em] text-white/50">Endpoints</p>
+      <div class="mt-6 space-y-5">
+        <div>
+          <p class="text-sm text-white/60">MCP gateway base</p>
+          <code class="mt-2 block rounded-2xl bg-white/10 px-4 py-3 text-sm"><%= mcpUrl %></code>
+        </div>
+        <div>
+          <p class="text-sm text-white/60">Health check</p>
+          <code class="mt-2 block rounded-2xl bg-white/10 px-4 py-3 text-sm"><%= healthUrl %></code>
+        </div>
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-4">
+          <p class="text-sm text-white/60">Server version</p>
+          <p class="mt-2 text-xl font-semibold"><%= serverVersion %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+    <div class="rounded-[2rem] border border-black/10 bg-white/80 p-8 shadow-panel backdrop-blur">
+      <div class="mb-5 flex items-center gap-3">
+        <i class="fa-solid fa-sliders text-accent"></i>
+        <h3 class="text-2xl font-semibold">Runtime Snapshot</h3>
+      </div>
+
+      <dl class="space-y-4">
+        <div class="flex items-center justify-between gap-3 border-b border-black/5 pb-3">
+          <dt class="text-black/55">Started At</dt>
+          <dd class="font-mono text-sm"><%= startedAt %></dd>
+        </div>
+        <div class="flex items-center justify-between gap-3 border-b border-black/5 pb-3">
+          <dt class="text-black/55">Last Request</dt>
+          <dd class="font-mono text-sm"><%= lastRequestAt %></dd>
+        </div>
+        <div class="flex items-center justify-between gap-3 border-b border-black/5 pb-3">
+          <dt class="text-black/55">Last Login</dt>
+          <dd class="font-mono text-sm"><%= lastLoginAt %></dd>
+        </div>
+        <div class="flex items-center justify-between gap-3">
+          <dt class="text-black/55">Active Services</dt>
+          <dd class="text-lg font-semibold"><%= toolCount %> / <%= serviceCards.length %></dd>
+        </div>
+      </dl>
+
+      <div class="mt-8 rounded-3xl bg-amber-50 p-5">
+        <p class="text-sm font-medium text-amber-900">Loaded Environment</p>
+        <div class="mt-4 space-y-3">
+          <% envSummary.forEach((item) => { %>
+          <div class="flex items-center justify-between gap-4 rounded-2xl bg-white px-4 py-3">
+            <span class="font-mono text-sm text-black/55"><%= item.key %></span>
+            <span class="font-mono text-sm"><%= item.value %></span>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="mt-8 rounded-3xl bg-emerald-50 p-5">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="text-sm font-medium text-emerald-900">Settings Panel</p>
+            <p class="mt-1 text-sm text-emerald-800/80">Change WebUI display settings.</p>
+          </div>
+          <a class="rounded-full bg-ink px-4 py-2 text-sm text-white transition hover:bg-accent" href="/settings">
+            <i class="fa-solid fa-sliders"></i>
+            Open Settings
+          </a>
+        </div>
+        <div class="mt-4 space-y-3">
+          <% settingsSummary.forEach((item) => { %>
+          <div class="flex items-center justify-between gap-4 rounded-2xl bg-white px-4 py-3">
+            <span class="text-sm text-black/55"><%= item.key %></span>
+            <span class="text-sm font-medium"><%= item.value %></span>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-[2rem] border border-black/10 bg-white/80 p-8 shadow-panel backdrop-blur">
+      <div class="mb-5 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <i class="fa-brands fa-google text-accent"></i>
+          <h3 class="text-2xl font-semibold">Google Services</h3>
+        </div>
+        <a class="rounded-full bg-ink px-4 py-2 text-sm text-white transition hover:bg-accent" href="/configure">
+          <i class="fa-solid fa-key"></i>
+          Configure
+        </a>
+      </div>
+
+      <div class="space-y-3">
+        <% serviceCards.forEach((svc) => { %>
+        <article class="rounded-3xl border border-black/5 bg-white p-4">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span class="text-xl"><%= svc.emoji %></span>
+              <div>
+                <h4 class="font-semibold"><%= svc.label %></h4>
+                <p class="text-xs text-black/40 font-mono mt-0.5">/mcp/<%= svc.id %></p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-black/40"><%= svc.authType %></span>
+              <% if (svc.configured) { %>
+              <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700">
+                <i class="fa-solid fa-circle-check"></i> Active
+              </span>
+              <% } else { %>
+              <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700">
+                <i class="fa-solid fa-triangle-exclamation"></i> Not configured
+              </span>
+              <% } %>
+            </div>
+          </div>
+        </article>
+        <% }) %>
+      </div>
+
+      <% if (mcpProtected) { %>
+      <div class="mt-5 rounded-3xl bg-slate-900 px-5 py-4">
+        <p class="text-xs text-white/50 mb-1"><i class="fa-solid fa-lock"></i> MCP endpoints protected</p>
+        <p class="text-xs text-white/70">Clients must send: <code class="text-amber-300">Authorization: Bearer &lt;token&gt;</code></p>
+      </div>
+      <% } else { %>
+      <div class="mt-5 rounded-3xl bg-amber-50 px-5 py-4">
+        <p class="text-xs text-amber-800"><i class="fa-solid fa-lock-open"></i> MCP endpoints open — set <code>MCP_ACCESS_TOKEN</code> in Configure to protect them</p>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</section>
