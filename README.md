@@ -130,11 +130,26 @@ Clients must then send: `Authorization: Bearer <your-token>`
 | `search_contacts` | Search contacts by name/email/phone |
 | `create_contact` | Create a new contact |
 
-## Docker
-
+### Docker
+Build locally:
 ```bash
 docker build -t google-mcp .
 docker run -p 8080:8080 --env-file .env google-mcp
+```
+
+### Docker Compose (GHCR)
+Use the pre-built image from GitHub Container Registry:
+```yaml
+services:
+  google-mcp:
+    image: ghcr.io/danish-mar/google-mcp:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
 ```
 
 ## WebUI
